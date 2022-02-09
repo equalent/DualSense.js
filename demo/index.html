@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DualSense Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.30/vue.global.min.js" crossorigin="anonymous"></script>
+    <script src="../lib/dualsense.js"></script>
+    <script src="demo.js"></script>
+    <style>
+        body {
+            text-align: center;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>DualSense Demo</h1>
+    <hr>
+    <div id="app">
+        <button @click="connect" v-if="!isConnected">Connect</button>
+        <button @click="disconnect" v-else>Disconnect</button>
+
+        <h3 v-if="!isConnected">Not Connected</h3>
+        <h3 v-else>{{controllerName}} <u>{{connectionType}}</u></h3>
+
+        <p><b>Left Stick: </b> ({{state.leftStickX}}, {{state.leftStickY}})</p>
+        <p><b>Right Stick: </b> ({{state.rightStickX}}, {{state.rightStickY}})</p>
+        <p><b>Left Trigger: </b> ({{state.leftTrigger}})</p>
+        <p><b>Right Trigger: </b> ({{state.rightTrigger}})</p>
+        <hr>
+        <div
+            :style="{width: '100px', height: '30px', marginLeft: 'auto', marginRight: 'auto', backgroundColor: `rgb(${ledColor.r * 255}, ${ledColor.g * 255}, ${ledColor.b * 255})`}">
+        </div>
+
+        <div>
+            <label style="color: red;">LED R: <input :disabled="!isConnected" type="range" min="0" max="1"
+                    v-model.number="ledColor.r" step="0.01"></label>
+            <label style="color: green;">LED G: <input :disabled="!isConnected" type="range" min="0" max="1"
+                    v-model.number="ledColor.g" step="0.01"></label>
+            <label style="color: blue;">LED B: <input :disabled="!isConnected" type="range" min="0" max="1"
+                    v-model.number="ledColor.b" step="0.01"></label>
+        </div>
+        <div>
+            <label>Left Motor: <input :disabled="!isConnected" type="range" min="0" max="1"
+                v-model.number="leftMotor" step="0.01"></label>
+            <label>Right Motor: <input :disabled="!isConnected" type="range" min="0" max="1"
+                v-model.number="rightMotor" step="0.01"></label>
+        </div>
+        <hr>
+        <!--         <p><b>Binary 4: </b> ({{state.raw['4']?.toString(2).padStart(8, '0')}})</p>
+        <p><b>Binary 5: </b> ({{state.raw['5']?.toString(2).padStart(8, '0')}})</p>
+        <p><b>Binary 6: </b> ({{state.raw['6']?.toString(2).padStart(8, '0')}})</p>
+        <hr> -->
+        <pre style="text-align: left;">{{JSON.stringify(state, null, 10)}}</pre>
+    </div>
+</body>
+
+</html>

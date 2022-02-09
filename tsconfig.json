@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "importHelpers": true,
+        "outDir": "lib",
+        "module": "ES6",
+        "target": "ES5",
+        "moduleResolution": "Node",
+        "allowSyntheticDefaultImports": true,
+        "lib": [
+            "ES2016",
+            "DOM"
+        ]
+    },
+    "include": [
+        "src/*"
+    ]
+}
